@@ -6,7 +6,7 @@ Code for **Expert Role-guided Adaptive Pruning for Efficient Federated Compressi
 
 The OLMoE experiments used Python 3.12, PyTorch 2.8.0+cu128, Transformers 4.46.3, Accelerate 1.1.1, one CUDA GPU, sequence length 128, seed 0, and 64 calibration samples per domain. Install these packages and the model's tokenizer dependencies in an environment compatible with your GPU. Set `FEDPRLLM_DATA_ROOT` to a directory containing `domain_clients/{squad,gsm8k,humaneval}.json`, the C4 calibration files in `local_c4_data/`, and PTB files in `local_ptb_data/`. WikiText-2 must be available online or in the Hugging Face cache for PPL evaluation.
 
-Ours also needs the `expert_roles.json` produced by role discovery. The OLMoE experiment used the role map saved at `/root/autodl-tmp/FedPrLLM/logs/expert_roles.json`; supply your copy through `--role_map_path`. The optional utilities in `scripts/collect_role_router_counts.py` and `scripts/build_reconstructed_role_map.py` can regenerate a compatible map from routing counts. For the retained OLMoE map, 1,024 expert role/domain assignments were checked against the saved activation frequencies using `tau_g=tau_a=0.125` and normalized `tau_h=0.8`.
+Ours also needs an expert role map. The OLMoE experiment's saved map is included at `artifacts/olmoe_expert_roles.json`; pass it through `--role_map_path`. The optional utilities in `scripts/collect_role_router_counts.py` and `scripts/build_reconstructed_role_map.py` can regenerate a compatible map from routing counts.
 
 ## Pruning
 
@@ -15,7 +15,7 @@ Run from the repository root. Replace the example paths before use:
 ```bash
 export FEDPRLLM_DATA_ROOT=/path/to/data-root
 MODEL=/path/to/OLMoE-1B-7B-0924-Instruct
-ROLE_MAP=/path/to/expert_roles.json
+ROLE_MAP=artifacts/olmoe_expert_roles.json
 OUT=/path/to/checkpoints/sparsity_50
 COMMON="--model $MODEL --sparsity_ratio 0.5 --prune_scope moe_only --seqlen 128 --nsamples_per_client 64 --clients_per_domain 1 --seed 0 --save_pruned_model --save_model_dir $OUT"
 
