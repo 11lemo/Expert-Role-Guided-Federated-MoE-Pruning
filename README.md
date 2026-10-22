@@ -1,6 +1,6 @@
-# Expert Role-guided Adaptive Pruning
+# Expert Role-Guided Client-Aware Pruning
 
-Code for **Expert Role-guided Adaptive Pruning for Efficient Federated Compression of Mixture-of-Experts Large Language Models**. This repository contains the proposed client-aware method and the Wanda, FedPrLLM, Client-Wanda, and MoE-Pruner comparison branches. Model weights, datasets, and pruned checkpoints are not included.
+Code for **Expert Role-Guided Client-Aware Pruning for Distributed Compression of Mixture-of-Experts Large Language Models**. This repository contains the proposed client-aware method and the Wanda, FedPrLLM, Client-Wanda, and MoE-Pruner comparison branches. Model weights, datasets, and pruned checkpoints are not included.
 
 ## Setup
 
